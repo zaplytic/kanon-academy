@@ -1,0 +1,19 @@
+{
+  "name": "@kanon/types",
+  "version": "1.0.0",
+  "type": "commonjs",
+  "private": true,
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "lint": "eslint . --ext .ts",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "zod": "^4.0.17"
+  }
+}
