@@ -15,11 +15,15 @@
     "lint:web": "yarn workspace @kanon/web lint",
     "lint:api": "yarn workspaces @kanon/api lint",
     "test": "yarn workspaces run test",
-    "lint": "yarn workspaces run lint"
+    "lint": "yarn workspaces run lint",
+    "prepare": "husky"
   },
   "dependencies": {
     "pino-pretty": "^13.1.1",
     "reflect-metadata": "^0.2.2",
     "tsyringe": "^4.10.0"
+  },
+  "devDependencies": {
+    "husky": "^9.1.7"
   }
 }

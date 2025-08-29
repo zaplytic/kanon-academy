@@ -1,6 +1,6 @@
-# Kanon: An Online Learning Platform for Bangladesh
+# Kanon Academy: An Online Learning Platform for Bangladesh
 
-Kanon is a modern, full-stack online learning platform designed to provide high-quality educational content to learners in Bangladesh. The platform will offer a wide range of courses, from professional development to personal hobbies, all tailored to the needs of the local market.
+Kanon Academy is a modern, full-stack online learning platform designed to provide high-quality educational content to learners in Bangladesh. The platform will offer a wide range of courses, from professional development to personal hobbies, all tailored to the needs of the local market.
 
 ## Tech Stack
 
@@ -33,7 +33,7 @@ To get started with this project, you will need to have Node.js, Yarn, and Docke
 1.  **Clone the repository:**
 
     ```bash
-    git clone <repository-url>
+    git clone git@github.com:zaplytic/kanon-academy.git
     cd kanon
     ```
 
