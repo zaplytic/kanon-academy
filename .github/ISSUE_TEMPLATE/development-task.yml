@@ -1,0 +1,42 @@
+name: "🚀 New Development Task"
+description: "Propose a new feature, chore, or refactor"
+labels: ["needs-triage"]
+body:
+  - type: textarea
+    id: user-story
+    attributes:
+      label: "User Story / Goal"
+      description: "Describe the goal from a user's perspective or state the desired outcome."
+      placeholder: "As a [user type], I want to [action] so that [benefit]."
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance-criteria
+    attributes:
+      label: "Acceptance Criteria"
+      description: "Define the specific, measurable criteria that must be met for this task to be considered complete. Use checklists."
+      placeholder: |
+        - [ ] The user can click the 'Login' button.
+        - [ ] A request is sent to the `/api/auth/login` endpoint.
+        - [ ] On success, the user is redirected to the `/dashboard`.
+        - [ ] On failure, an error message is displayed.
+    validations:
+      required: true
+
+  - type: textarea
+    id: technical-breakdown
+    attributes:
+      label: "Technical Breakdown (Optional)"
+      description: "Outline the technical approach, files to change, new dependencies, or API contracts."
+      placeholder: |
+        - Modify `Login.tsx` to handle form submission.
+        - Create a new `useAuth` hook for API calls.
+        - No new dependencies are required.
+
+  - type: input
+    id: designs
+    attributes:
+      label: "Designs / Mockups (Optional)"
+      description: "Link to any relevant design files (e.g., Figma, screenshots)."
+      placeholder: "https://www.figma.com/..."

@@ -1,0 +1,57 @@
+name: "🐛 Bug Report"
+description: "Create a report to help us improve"
+labels: ["bug", "needs-triage"]
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: "Description"
+      description: "A clear and concise description of what the bug is."
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps-to-reproduce
+    attributes:
+      label: "Steps to Reproduce"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: affected-part
+    attributes:
+      label: "Affected Part"
+      multiple: true
+      options:
+        - "ux"
+        - "ui"
+        - "data"
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected-behavior
+    attributes:
+      label: "Expected Behavior"
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual-behavior
+    attributes:
+      label: "Actual Behavior"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: severity
+    attributes:
+      label: "Severity"
+      description: "How critical is this bug?"
+      options:
+        - "Critical (Showstopper, blocks development/testing)"
+        - "High (Major functionality is broken)"
+        - "Medium (Minor functionality is broken or user-facing issue)"
+        - "Low (Trivial issue, nice to have)"
+    validations:
+      required: true
