@@ -1,11 +1,13 @@
-import AppRouter from "";
+import AppRouter from "./router";
 import Navbar from "./components/Navbar";
 
 export default function App() {
   return (
-    <div>
+    <div className="min-h-screen bg-neutral-100">
       <Navbar />
-      <AppRouter />
+      <main>
+        <AppRouter />
+      </main>
     </div>
   );
 }

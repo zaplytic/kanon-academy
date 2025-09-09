@@ -1,4 +1,46 @@
+/* Montserrat (Display) */
+@font-face {
+  font-display: swap;
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: ;
+  src: url("/assets/fonts/Montserrat-SemiBold.woff2") format("woff2");
+}
+
+/* Inter (English) */
+@font-face {
+  font-display: swap;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400 700;
+  src: url("/assets/fonts/Inter-Regular.woff2") format("woff2");
+}
+
+/* Hind Siliguri (Bangla) */
+@font-face {
+  font-display: swap;
+  font-family: "Hind Siliguri";
+  font-style: normal;
+  font-weight: 400;
+  src: url("/assets/fonts/HindSiliguri-Regular.woff2") format("woff2");
+}
+@font-face {
+  font-display: swap;
+  font-family: "Hind Siliguri";
+  font-style: normal;
+  font-weight: 700;
+  src: url("/assets/fonts/HindSiliguri-SemiBold.woff2") format("woff2");
+}
+
+/* JetBrains Mono (Code) */
+@font-face {
+  font-display: swap;
+  font-family: "JetBrains Mono";
+  font-style: normal;
+  font-weight: 400;
+  src: url("/assets/fonts/JetBrainsMono-Regular.woff2") format("woff2");
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-/* You can add global styles to this file, and also import other style files */
