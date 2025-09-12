@@ -111,7 +111,6 @@ logs/
 
 
 *.sqlite
-*.sql
 
 *.tsbuildinfo
 
