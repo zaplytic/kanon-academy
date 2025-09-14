@@ -2,9 +2,11 @@ import * as z from "zod";
 
 import { dbSelectUserType } from "@kanon-academy/db-schema";
 
-import { registrationSchema } from "./validations/index.js";
+import { registrationSchema, loginSchema } from "./validations/index.js";
 
 export type RegistrationInput = z.infer<typeof registrationSchema>["body"];
+
+export type LoginInput = z.infer<typeof loginSchema>["body"];
 
 export type UserResponse = Omit<
   dbSelectUserType,
@@ -17,3 +19,8 @@ export type UserResponse = Omit<
   | "status"
   | "role"
 >;
+
+export type LoginResponse = {
+  token: string;
+  user: UserResponse;
+};

@@ -2,7 +2,13 @@ import { Request, Response } from "express";
 import { singleton } from "tsyringe";
 
 import AuthService from "@/services/auth.service";
-import { RegistrationInput, ApiResponse, UserResponse } from "@kanon-academy/types";
+import {
+  RegistrationInput,
+  ApiResponse,
+  UserResponse,
+  LoginInput,
+  LoginResponse
+} from "@kanon-academy/types";
 
 @singleton()
 export default class AuthController {
@@ -17,5 +23,17 @@ export default class AuthController {
       timestamp: Date()
     };
     res.status(201).json(response);
+  };
+
+  handleLogin = async (req: Request, res: Response) => {
+    const result: LoginResponse = await this.authService.loginUser(req.body as LoginInput);
+
+    const response: ApiResponse<LoginResponse> = {
+      success: true,
+      message: "User successfully logged in",
+      data: result,
+      timestamp: Date()
+    };
+    res.status(200).json(response);
   };
 }
