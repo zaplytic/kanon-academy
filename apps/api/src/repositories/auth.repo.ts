@@ -16,6 +16,17 @@ export default class AuthRepository {
     return result[0].value > 0;
   }
 
+  async findUserByEmail(email: string): Promise<dbSelectUserType | null> {
+    // @ts-expect-error - Drizzle type compatibility issue
+    const user: dbSelectUserType[] = await db.select().from(users).where(eq(users.email, email));
+    return user[0] ?? null;
+  }
+
+  async updateLastLogin(id: number): Promise<void> {
+    // @ts-expect-error - Drizzle type compatibility issue
+    await db.update(users).set({ last_login_at: new Date() }).where(eq(users.id, id));
+  }
+
   async createUser(userInsert: dbInsertUserType): Promise<dbSelectUserType> {
     const emailExists = await this.checkEmailExistence(userInsert.email);
 

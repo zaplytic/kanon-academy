@@ -1,4 +1,4 @@
-import { RegistrationInput, UserResponse } from "@kanon-academy/types";
+import { LoginResponse, RegistrationInput, UserResponse } from "@kanon-academy/types";
 import { dbInsertUserType, dbSelectUserType } from "@kanon-academy/db-schema";
 
 export function toUserPersistence(input: RegistrationInput, hash: string): dbInsertUserType {
@@ -17,5 +17,12 @@ export function toUserResponse(input: dbSelectUserType): UserResponse {
     email: input.email,
     full_name: input.full_name,
     created_at: input.created_at
+  };
+}
+
+export function toLoginResponse(input: dbSelectUserType, jwt: string): LoginResponse {
+  return {
+    token: jwt,
+    user: toUserResponse(input)
   };
 }
