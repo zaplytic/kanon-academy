@@ -7,10 +7,9 @@ const app: Express = express();
 
 app.use(httpLogger);
 
-app.use("/api", rootRouter);
-
 app.use(express.json());
 
+app.use("/api", rootRouter);
 app.use(errorHandler);
 
 export default app;
