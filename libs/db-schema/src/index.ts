@@ -16,15 +16,10 @@ const timestamps = {
 };
 
 export const roleEnum = pgEnum("userRoles", ["student", "instructor"]);
-export const statusEnum = pgEnum("userStatuses", [
-  "active",
-  "locked",
-  "deleted",
-  "suspended"
-]);
+export const statusEnum = pgEnum("userStatuses", ["active", "locked", "deleted", "suspended"]);
 
 export const users = pgTable("users", {
-  id: integer().primaryKey().generatedAlwaysAsIdentity(),
+  id: integer().primaryKey().generatedByDefaultAsIdentity(),
   full_name: varchar({ length: 255 }),
   email: varchar({ length: 255 }).unique().notNull(),
   email_verified_at: timestamp(),
@@ -37,7 +32,7 @@ export const users = pgTable("users", {
 });
 
 export const courses = pgTable("courses", {
-  id: integer().primaryKey().generatedAlwaysAsIdentity(),
+  id: integer().primaryKey().generatedByDefaultAsIdentity(),
   title: varchar({ length: 255 }).notNull(),
   description: text().notNull(),
   category_id: integer()
@@ -51,7 +46,7 @@ export const courses = pgTable("courses", {
 });
 
 export const milestones = pgTable("milestones", {
-  id: integer().primaryKey().generatedAlwaysAsIdentity(),
+  id: integer().primaryKey().generatedByDefaultAsIdentity(),
   course_id: integer().references(() => courses.id, { onDelete: "cascade" }),
   title: varchar({ length: 255 }).notNull(),
   description: text(),
@@ -60,7 +55,7 @@ export const milestones = pgTable("milestones", {
 });
 
 export const lessons = pgTable("lessons", {
-  id: integer().primaryKey().generatedAlwaysAsIdentity(),
+  id: integer().primaryKey().generatedByDefaultAsIdentity(),
   milestone_id: integer()
     .notNull()
     .references(() => milestones.id, { onDelete: "cascade" }),
@@ -73,7 +68,7 @@ export const lessons = pgTable("lessons", {
 export const enrollments = pgTable(
   "enrollments",
   {
-    id: integer().primaryKey().generatedAlwaysAsIdentity(),
+    id: integer().primaryKey().generatedByDefaultAsIdentity(),
     user_id: integer()
       .notNull()
       .references(() => users.id, { onDelete: "cascade" }),
@@ -87,7 +82,7 @@ export const enrollments = pgTable(
 );
 
 export const categories = pgTable("categories", {
-  id: integer().primaryKey().generatedAlwaysAsIdentity(),
+  id: integer().primaryKey().generatedByDefaultAsIdentity(),
   name: varchar({ length: 255 }).unique().notNull(),
   description: text(),
   ...timestamps

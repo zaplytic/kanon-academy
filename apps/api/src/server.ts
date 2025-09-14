@@ -9,7 +9,5 @@ const healthCheckService = container.resolve(HealthCheckService);
 
 app.listen(secrets.PORT, async () => {
   await healthCheckService.dbConnectionCheck();
-  logger.info(
-    `Server is running on port ${secrets.PORT} in ${secrets.ENVIRONMENT}`
-  );
+  logger.info(`Server is running on port ${secrets.PORT} in ${secrets.ENVIRONMENT}`);
 });

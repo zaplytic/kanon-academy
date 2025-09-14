@@ -23,6 +23,9 @@
   ],
   "references": [
     {
+      "path": "../../libs/db-schema/tsconfig.lib.json"
+    },
+    {
       "path": "../../libs/types/tsconfig.lib.json"
     }
   ]

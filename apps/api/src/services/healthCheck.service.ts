@@ -55,10 +55,7 @@ export default class HealthCheckService {
       } else if (error instanceof DrizzleQueryError) {
         logger.error({ error: error }, "Database query error: ");
       } else if (error instanceof Error) {
-        logger.error(
-          { error: error },
-          "Unexpected error during database check: "
-        );
+        logger.error({ error: error }, "Unexpected error during database check: ");
       }
     }
   }
