@@ -7,7 +7,7 @@ export function toUserPersistence(input: RegistrationInput, hash: string): dbIns
     password_hash: hash,
     email: input.email,
     status: "active",
-    role: input.role || "student"
+    role: "student"
   };
 }
 

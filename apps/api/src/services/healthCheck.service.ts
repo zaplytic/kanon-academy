@@ -51,11 +51,13 @@ export default class HealthCheckService {
       logger.info("Database connected successfully");
     } catch (error) {
       if (error instanceof DrizzleError) {
-        logger.error({ error: error }, "Database connection error: ");
+        logger.error({ error }, "Database connection error: ");
       } else if (error instanceof DrizzleQueryError) {
-        logger.error({ error: error }, "Database query error: ");
+        logger.error({ error }, "Database query error: ");
       } else if (error instanceof Error) {
-        logger.error({ error: error }, "Unexpected error during database check: ");
+        logger.error({ error }, "Unexpected error during database check: ");
+      } else {
+        logger.error({ error }, "Unexpected non-error thrown during database check: ");
       }
     }
   }
