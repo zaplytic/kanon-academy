@@ -6,7 +6,8 @@ import {
   LoginInput,
   UnauthorizedError,
   RegistrationInput,
-  LoginResponse
+  LoginResponse,
+  JwtPayload
 } from "@kanon-academy/types";
 import { toUserPersistence, toUserResponse, toLoginResponse } from "@/mappers/auth.mapper";
 import { dbSelectUserType } from "@kanon-academy/db-schema";
@@ -39,8 +40,8 @@ export default class AuthService {
       throw new UnauthorizedError("Invalid email or password");
     }
 
-    const claims = { sub: String(user.id), email: user.email };
-    const token = jwt.sign(claims, JWT_SECRET, {
+    const payload: JwtPayload = { sub: String(user.id), email: user.email };
+    const token = jwt.sign(payload, JWT_SECRET, {
       algorithm: "HS256",
       expiresIn: "15m",
       issuer: "kanon-academy",

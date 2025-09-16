@@ -1,7 +1,9 @@
 import { ZodIssue } from "zod";
 
-type FormattedZodErrors = {
-  [key: string | number]: string | FormattedZodErrors;
+export type FormattedZodErrors = {
+  [key: string]: string | FormattedZodErrors;
+} & {
+  [key: number]: string | FormattedZodErrors;
 };
 
 export default function formatZodIssues(issues: ZodIssue[]): FormattedZodErrors {

@@ -1,8 +1,8 @@
-export interface ApiResponse<T> {
+export interface ApiResponse<T, E = unknown> {
   success: boolean;
   message: string;
   data?: T;
-  error?: T | string;
+  error?: E | string;
   timestamp: string;
 }
 

@@ -18,7 +18,13 @@ export default class AuthRepository {
 
   async findUserByEmail(email: string): Promise<dbSelectUserType | null> {
     // @ts-expect-error - Drizzle type compatibility issue
-    const user: dbSelectUserType[] = await db.select().from(users).where(eq(users.email, email));
+    const user: dbSelectUserType[] = await db
+      .select()
+      // @ts-expect-error - Drizzle type compatibility issue
+      .from(users)
+      // @ts-expect-error - Drizzle type compatibility issue
+      .where(eq(users.email, email))
+      .limit(1);
     return user[0] ?? null;
   }
 
@@ -28,15 +34,14 @@ export default class AuthRepository {
   }
 
   async createUser(userInsert: dbInsertUserType): Promise<dbSelectUserType> {
-    const emailExists = await this.checkEmailExistence(userInsert.email);
-
-    if (emailExists) {
-      throw new AppError("Email Already Exists", 409);
-    }
-
     // FIX: PgTableWithColumns and PgTable<TableConfig>
     // @ts-expect-error - Drizzle type compatibility issue
-    const user: dbSelectUserType[] = await db.insert(users).values(userInsert).returning();
-    return user[0];
+    const inserted: dbSelectUserType[] = await db.insert(users).values(userInsert).returning();
+
+    if (inserted.length === 0) {
+      throw new AppError("Email already exists", 409);
+    }
+
+    return inserted[0];
   }
 }

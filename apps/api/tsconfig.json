@@ -10,9 +10,6 @@
   },
   "references": [
     {
-      "path": "../../libs/db-schema"
-    },
-    {
       "path": "../../libs/types"
     },
     {

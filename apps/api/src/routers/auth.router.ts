@@ -5,7 +5,7 @@ import { rateLimit } from "express-rate-limit";
 import AuthController from "@/controllers/auth.controller";
 import asyncHandler from "@/utils/asyncHandler";
 import validationHandler from "@/middlewares/validationHandler";
-import { loginSchema, registrationSchema } from "@kanon-academy/types";
+import { ApiResponse, loginSchema, registrationSchema } from "@kanon-academy/types";
 
 const authController = container.resolve(AuthController);
 
@@ -13,7 +13,11 @@ const loginLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
   limit: 10,
   legacyHeaders: false,
-  ipv6Subnet: 56
+  ipv6Subnet: 56,
+  message: {
+    success: false,
+    message: "Too many login attempts, Please try again later"
+  } as ApiResponse<void>
 });
 
 const authRouter = Router();

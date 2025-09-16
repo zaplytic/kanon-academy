@@ -1,7 +1,5 @@
 import * as z from "zod";
-
 import { dbSelectUserType } from "@kanon-academy/db-schema";
-
 import { registrationSchema, loginSchema } from "./validations/index.js";
 
 export type RegistrationInput = z.infer<typeof registrationSchema>["body"];
@@ -23,4 +21,9 @@ export type UserResponse = Omit<
 export type LoginResponse = {
   token: string;
   user: UserResponse;
+};
+
+export type JwtPayload = {
+  sub: string;
+  email: string;
 };

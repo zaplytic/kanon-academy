@@ -27,7 +27,11 @@ export const registrationSchema = z.object({
 
 export const loginSchema = z.object({
   body: z.object({
-    email: z.email("Please provide a valid email").transform((v) => v.trim().toLowerCase()),
+    email: z
+      .string()
+      .trim()
+      .transform((v) => v.toLowerCase())
+      .pipe(z.email("Please provide a valid email")),
     password: z.string().min(6, "Password is too short").max(128, "Password is too long")
   })
 });

@@ -20,8 +20,9 @@ export default class AuthController {
       success: true,
       message: "User successfully created",
       data: result,
-      timestamp: Date()
+      timestamp: new Date().toISOString()
     };
+    res.set("Location", `/users/${result.id}`);
     res.status(201).json(response);
   };
 
@@ -32,8 +33,9 @@ export default class AuthController {
       success: true,
       message: "User successfully logged in",
       data: result,
-      timestamp: Date()
+      timestamp: new Date().toISOString()
     };
+    res.set("Cache-Control", "no-store");
     res.status(200).json(response);
   };
 }

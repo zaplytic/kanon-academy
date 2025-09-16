@@ -1,9 +1,9 @@
 import { ZodError } from "zod";
 import { NextFunction, Request, Response } from "express";
-import { AppError } from "@kanon-academy/types";
+import { AppError, ApiResponse } from "@kanon-academy/types";
 import logger from "@/config/logger";
 import { ENVIRONMENT } from "@/config/secrets";
-import formatZodIssues from "@/utils/formatZodError";
+import formatZodIssues, { type FormattedZodErrors } from "@/utils/formatZodError";
 
 const errorHandler = (
   err: Error,
@@ -12,26 +12,26 @@ const errorHandler = (
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   _next: NextFunction
 ) => {
-  logger.error(`💥: ${err.message}`);
+  logger.error(`💥 ${err.stack ?? err.message}`);
 
   if (err instanceof AppError) {
     return res.status(err.statusCode).json({
       success: false,
       message: err.message,
-      error: process.env.NODE_ENV === "development" ? err.stack : undefined
-    });
+      error: ENVIRONMENT === "development" ? err.stack : undefined
+    } as ApiResponse<void>);
   } else if (err instanceof ZodError) {
     return res.status(400).json({
       success: false,
       message: "Invalid request data",
       error: formatZodIssues(err.issues)
-    });
+    } as ApiResponse<void, FormattedZodErrors>);
   } else {
     return res.status(500).json({
       success: false,
       message: "Internal Server Error",
       error: ENVIRONMENT === "development" ? err.stack : undefined
-    });
+    } as ApiResponse<void>);
   }
 };
 
