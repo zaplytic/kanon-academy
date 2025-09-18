@@ -16,7 +16,8 @@ const timestamps = {
 };
 
 export const roleEnum = pgEnum("userRoles", ["student", "instructor"]);
-export const statusEnum = pgEnum("userStatuses", ["active", "locked", "deleted", "suspended"]);
+export const userStatusEnum = pgEnum("userStatuses", ["pending", "active", "locked", "suspended"]);
+export const courseStatusEnum = pgEnum("courseStatuses", ["draft", "archived", "published"]);
 
 export const users = pgTable("users", {
   id: integer().primaryKey().generatedByDefaultAsIdentity(),
@@ -26,7 +27,7 @@ export const users = pgTable("users", {
   password_hash: varchar({ length: 511 }).notNull(),
   bio: text(),
   role: roleEnum().notNull(),
-  status: statusEnum().notNull(),
+  status: userStatusEnum().notNull().default("active"),
   last_login_at: timestamp(),
   ...timestamps
 });
@@ -34,11 +35,12 @@ export const users = pgTable("users", {
 export const courses = pgTable("courses", {
   id: integer().primaryKey().generatedByDefaultAsIdentity(),
   title: varchar({ length: 255 }).notNull(),
+  status: courseStatusEnum().notNull().default("draft"),
   description: text().notNull(),
   category_id: integer()
     .notNull()
     .references(() => categories.id, { onDelete: "cascade" }),
-  featured_image_id: integer(),
+  featured_image_link: text(),
   instructor_id: integer()
     .notNull()
     .references(() => users.id, { onDelete: "cascade" }), // TODO: Check if the user is instructor
@@ -90,3 +92,9 @@ export const categories = pgTable("categories", {
 
 export type dbInsertUserType = typeof users.$inferInsert;
 export type dbSelectUserType = typeof users.$inferSelect;
+
+export type dbInsertCourseType = typeof courses.$inferInsert;
+export type dbSelectCourseType = typeof courses.$inferSelect;
+
+export type dbInsertCategoryType = typeof categories.$inferInsert;
+export type dbSelectCategoryType = typeof categories.$inferSelect;
