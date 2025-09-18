@@ -6,10 +6,6 @@ import { AppError } from "@kanon-academy/types";
 
 @singleton()
 export default class AuthRepository {
-  constructor() {
-    /* empty */
-  }
-
   async checkEmailExistence(email: string): Promise<boolean> {
     // @ts-expect-error - Drizzle type compatibility issue
     const result = await db.select({ value: count() }).from(users).where(eq(users.email, email));

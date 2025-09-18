@@ -1,6 +1,6 @@
 {
-  "id": "47c1e23a-af77-4faf-bf48-9843843161a8",
-  "prevId": "460ca73f-7583-4c49-aba0-2fee113faffa",
+  "id": "5e194b4b-59fe-4787-a226-27a4ea63480f",
+  "prevId": "032008be-a302-477b-94dc-3f57e57801f0",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -99,6 +99,13 @@
           "primaryKey": false,
           "notNull": true
         },
+        "status": {
+          "name": "status",
+          "type": "courseStatuses",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
         "description": {
           "name": "description",
           "type": "text",
@@ -111,9 +118,9 @@
           "primaryKey": false,
           "notNull": true
         },
-        "featured_image_id": {
-          "name": "featured_image_id",
-          "type": "integer",
+        "featured_image_link": {
+          "name": "featured_image_link",
+          "type": "varchar(511)",
           "primaryKey": false,
           "notNull": false
         },
@@ -457,7 +464,7 @@
           "name": "full_name",
           "type": "varchar(255)",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "email": {
           "name": "email",
@@ -540,6 +547,11 @@
     }
   },
   "enums": {
+    "public.courseStatuses": {
+      "name": "courseStatuses",
+      "schema": "public",
+      "values": ["draft", "archived", "published"]
+    },
     "public.userRoles": {
       "name": "userRoles",
       "schema": "public",
@@ -548,7 +560,7 @@
     "public.userStatuses": {
       "name": "userStatuses",
       "schema": "public",
-      "values": ["active", "locked", "deleted", "suspended"]
+      "values": ["pending", "active", "locked", "suspended"]
     }
   },
   "schemas": {},

@@ -1,6 +1,6 @@
 {
-  "id": "032008be-a302-477b-94dc-3f57e57801f0",
-  "prevId": "00000000-0000-0000-0000-000000000000",
+  "id": "d72da520-316a-4763-9bb9-788cd1b99f83",
+  "prevId": "995afed2-f995-4cf1-b88c-3d146da9dd97",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -104,7 +104,8 @@
           "type": "courseStatuses",
           "typeSchema": "public",
           "primaryKey": false,
-          "notNull": true
+          "notNull": true,
+          "default": "'draft'"
         },
         "description": {
           "name": "description",
@@ -120,7 +121,7 @@
         },
         "featured_image_link": {
           "name": "featured_image_link",
-          "type": "varchar(511)",
+          "type": "text",
           "primaryKey": false,
           "notNull": false
         },
@@ -502,7 +503,8 @@
           "type": "userStatuses",
           "typeSchema": "public",
           "primaryKey": false,
-          "notNull": true
+          "notNull": true,
+          "default": "'active'"
         },
         "last_login_at": {
           "name": "last_login_at",
