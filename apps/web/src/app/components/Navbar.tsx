@@ -1,39 +1,91 @@
+import { AppShell, Burger, Group, Button, Text, useMantineTheme, Image } from "@mantine/core";
+import { useDisclosure, useMediaQuery } from "@mantine/hooks";
 import { Link } from "react-router-dom";
+import { ReactNode } from "react";
 
-export default function Navbar() {
+interface NavbarProps {
+  children: ReactNode;
+}
+
+export default function Navbar({ children }: NavbarProps) {
+  const [opened, { toggle }] = useDisclosure();
+  const theme = useMantineTheme();
+  const isMobile = useMediaQuery(`(max-width: ${theme.breakpoints.md})`);
+
   return (
-    <nav className="bg-white shadow-sm sticky top-0 z-50 border-b border-neutral-300">
-      <div className="container mx-auto px-6 py-4 flex justify-between items-center">
-        <Link
-          to="/"
-          className="font-display text-2xl font-bold text-neutral-text flex items-center gap-2"
-        >
-          <img
-            src="/assets/logo.png"
-            alt="Kanon Academy Logo"
-            className="h-8 object-cover"
-          />
-          <span className="pt-1">Kanon Academy</span>
-        </Link>
-        <ul className="flex items-center space-x-6">
-          <li>
+    <AppShell
+      padding="md"
+      header={{ height: 60 }}
+      navbar={
+        isMobile
+          ? {
+              width: 300,
+              breakpoint: "md",
+              collapsed: { mobile: !opened }
+            }
+          : undefined
+      }>
+      <AppShell.Header>
+        <Group h="100%" px="md" justify="space-between">
+          <Group>
+            <Burger opened={opened} onClick={toggle} hiddenFrom="md" size="sm" />
             <Link
-              to="/auth/login"
-              className="text-neutral-text font-medium hover:text-primary"
-            >
-              Login
+              to="/"
+              style={{
+                display: "flex",
+                alignItems: "center",
+                textDecoration: "none",
+                color: "inherit",
+                gap: "var(--mantine-spacing-xs)"
+              }}>
+              <Image
+                src="/assets/logo.png"
+                alt={"Kanon Academy Logo"}
+                h={36}
+                style={{ paddingBottom: 4 }}
+              />
+              <Text fw={700} size={"1.5rem"} style={{ whiteSpace: "nowrap" }} visibleFrom={"md"}>
+                Kanon Academy
+              </Text>
             </Link>
-          </li>
-          <li>
-            <Link
-              to="/auth/register"
-              className="bg-primary hover:bg-primary-hover text-white font-bold py-2 px-4 rounded-md"
-            >
-              Register
-            </Link>
-          </li>
-        </ul>
-      </div>
-    </nav>
+          </Group>
+          <Group visibleFrom="md">
+            <Button component={Link} to="/courses" variant="subtle">
+              Courses
+            </Button>
+            <Button component={Link} to="/pricing" variant="subtle">
+              Pricing
+            </Button>
+            <Button component={Link} to="/about" variant="subtle">
+              About
+            </Button>
+          </Group>
+          <Group>
+            <Button component={Link} to="/auth/login" variant="default">
+              Log In
+            </Button>
+            <Button component={Link} to="/auth/register">
+              Sign Up
+            </Button>
+          </Group>
+        </Group>
+      </AppShell.Header>
+
+      {isMobile && (
+        <AppShell.Navbar p="md">
+          <Button component={Link} to="/courses" variant="subtle" fullWidth>
+            Courses
+          </Button>
+          <Button component={Link} to="/pricing" variant="subtle" fullWidth>
+            Pricing
+          </Button>
+          <Button component={Link} to="/about" variant="subtle" fullWidth>
+            About
+          </Button>
+        </AppShell.Navbar>
+      )}
+
+      <AppShell.Main>{children}</AppShell.Main>
+    </AppShell>
   );
 }
