@@ -4,9 +4,19 @@
     <meta charset="utf-8" />
     <title>Kanon Academy</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
   </head>
-  <body class="bg-zinc-950 text-zinc-100 font-sans">
+  <body>
     <div id="root"></div>
+    <script id="mantine-color-scheme-script">
+      (function () {
+        try {
+          var e = localStorage.getItem("mantine-color-scheme") || "dark";
+          document.documentElement.setAttribute("data-mantine-color-scheme", e);
+        } catch (t) {
+          document.documentElement.setAttribute("data-mantine-color-scheme", "dark");
+        }
+      })();
+    </script>
   </body>
 </html>

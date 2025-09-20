@@ -85,7 +85,7 @@
     "@nx/react": {
       "application": {
         "babel": true,
-        "style": "tailwind",
+        "style": "postcss",
         "linter": "eslint",
         "bundler": "webpack"
       },
