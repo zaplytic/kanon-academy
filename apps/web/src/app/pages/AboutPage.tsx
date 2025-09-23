@@ -1,5 +1,7 @@
-import { Container, Title, Text, Grid, Card, Avatar, ThemeIcon, rem, Image } from "@mantine/core";
+import { Container, Title, Text, Grid, Card, Avatar, ThemeIcon, Skeleton } from "@mantine/core";
 import { IconAward, IconUsers, IconBulb } from "@tabler/icons-react";
+import Lottie from "lottie-react";
+import { useEffect, useState } from "react";
 
 const teamMembers = [
   {
@@ -8,9 +10,9 @@ const teamMembers = [
     avatar: "https://randomuser.me/api/portraits/men/73.jpg"
   },
   {
-    name: "Shamsut Tabriz",
+    name: "Rehnuma Tabassum",
     title: "Head of Curriculum",
-    avatar: "https://randomuser.me/api/portraits/men/71.jpg"
+    avatar: "https://randomuser.me/api/portraits/women/72.jpg"
   },
   {
     name: "Tahmid Arefin",
@@ -41,9 +43,14 @@ const values = [
 ];
 
 export default function AboutPage() {
+  const [animationData, setAnimationData] = useState<unknown>(null);
+
+  useEffect(() => {
+    import("../../assets/CreatingApplication.json").then(setAnimationData);
+  }, []);
+
   return (
     <>
-      {/* Hero Section */}
       <Container size="lg" py="xl">
         <Title order={1} ta="center" size={"2.3rem"} fw={900}>
           We are on a mission to redefine the future of learning.
@@ -55,15 +62,14 @@ export default function AboutPage() {
         </Text>
       </Container>
 
-      {/* Our Story Section */}
       <Container size="lg" py="xl">
-        <Grid gutter={{ base: "xl", md: 50 }} align="center">
-          <Grid.Col span={{ base: 12, md: 6 }}>
-            <Image
-              radius="md"
-              src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=2070&auto=format&fit=crop"
-              alt="Our team collaborating"
-            />
+        <Grid gutter={{ base: "xl", md: 50 }}>
+          <Grid.Col span={{ base: 12, md: 6 }} mt={-40} visibleFrom="sm">
+            {animationData ? (
+              <Lottie animationData={animationData} style={{ height: 450 }} />
+            ) : (
+              <Skeleton h={450} />
+            )}
           </Grid.Col>
           <Grid.Col span={{ base: 12, md: 6 }}>
             <Title order={2} mb="lg">
@@ -75,15 +81,24 @@ export default function AboutPage() {
               need for a platform that not only teaches skills but also fosters a community and
               provides a clear path to success in the tech industry.
             </Text>
-            <Text>
+            <Text mb="md">
               Today, we are proud to have helped hundreds of students launch new careers, master new
               skills, and redefine their futures. Our journey is just beginning.
+            </Text>
+            <Text mb="md">
+              We empower innovators through a hands-on curriculum built on real-world projects. Our
+              courses constantly evolve with the tech landscape, keeping our students ahead of the
+              curve and ready for the future.
+            </Text>
+            <Text mb="md">
+              Join us as we build a global community of learners, creators, and leaders. Together,
+              we can shape the future of technology and create a world where passion is the only
+              prerequisite for innovation.
             </Text>
           </Grid.Col>
         </Grid>
       </Container>
 
-      {/* Values Section */}
       <Container size="lg" py="xl">
         <Title order={2} ta="center" mb="xl">
           Our Core Values
@@ -93,7 +108,7 @@ export default function AboutPage() {
             <Grid.Col span={{ base: 12, md: 4 }} key={value.title}>
               <Card shadow="sm" padding="xl" radius="md" withBorder>
                 <ThemeIcon size="xl" radius="md" variant="light">
-                  <value.icon style={{ width: rem(28), height: rem(28) }} />
+                  <value.icon style={{ width: 28, height: 28 }} />
                 </ThemeIcon>
                 <Title order={3} mt="md">
                   {value.title}
@@ -107,7 +122,6 @@ export default function AboutPage() {
         </Grid>
       </Container>
 
-      {/* Team Section */}
       <Container size="lg" py="xl">
         <Title order={2} ta="center" mb="xl">
           Meet the Team

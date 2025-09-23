@@ -1,8 +1,8 @@
 import { Routes, Route } from "react-router-dom";
-import LoginPage from "../../pages/LoginPage";
-import RegistrationPage from "../../pages/RegistrationPage";
+import LoginPage from "./LoginPage";
+import RegistrationPage from "./RegistrationPage";
 
-export default function AuthRoutes() {
+export function AuthRouter() {
   return (
     <Routes>
       <Route path="login" element={<LoginPage />} />

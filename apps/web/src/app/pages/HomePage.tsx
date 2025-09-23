@@ -1,10 +1,27 @@
-import { Container, Stack, Title, Text, Button, Grid, Card, ThemeIcon, Group } from "@mantine/core";
+import {
+  Container,
+  Stack,
+  Title,
+  Text,
+  Button,
+  Grid,
+  Card,
+  ThemeIcon,
+  Group,
+  Skeleton
+} from "@mantine/core";
 import { IconRocket, IconUsers, IconCertificate } from "@tabler/icons-react";
 import Lottie from "lottie-react";
-import SocialStrategy from "./SocialStrategy.json";
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 export default function HomePage() {
+  const [animationData, setAnimationData] = useState<unknown>("");
+
+  useEffect(() => {
+    import("../../assets/SocialStrategy.json").then(setAnimationData);
+  }, []);
+
   return (
     <>
       <Container size="lg" py="xl">
@@ -31,7 +48,11 @@ export default function HomePage() {
             </Group>
           </Grid.Col>
           <Grid.Col span={{ base: 12, md: 5 }}>
-            <Lottie animationData={SocialStrategy} />
+            {animationData ? (
+              <Lottie animationData={animationData} style={{ height: 450 }} />
+            ) : (
+              <Skeleton h={450} />
+            )}
           </Grid.Col>
         </Grid>
       </Container>

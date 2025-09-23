@@ -23,7 +23,7 @@ export default function RegistrationPage() {
 
       <Paper withBorder shadow="md" p={30} mt={30} radius="md">
         <TextInput label="Full Name" placeholder="Your Name" required />
-        <TextInput label="Email" placeholder="you@mantine.dev" required mt="md" />
+        <TextInput label="Email" placeholder="you@example.com" required mt="md" />
         <PasswordInput label="Password" placeholder="Your password" required mt="md" />
         <PasswordInput
           label="Confirm Password"
