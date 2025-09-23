@@ -112,7 +112,7 @@
   },
   "lint-staged": {
     "*.{js,ts,jsx,tsx,html,css,scss,json,md}": [
-      "prettier --write",
+      "prettier -c",
       "nx run-many -t lint --fix",
       "nx run-many -t test",
       "nx run-many -t typecheck"
