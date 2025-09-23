@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import { AuthRoutes } from "./features/auth";
+import { AuthRouter } from "./pages/auth";
 import HomePage from "./pages/HomePage";
 import CoursesPage from "./pages/CoursesPage";
 import PricingPage from "./pages/PricingPage";
@@ -9,7 +9,7 @@ export default function AppRouter() {
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />
-      <Route path="/auth/*" element={<AuthRoutes />} />
+      <Route path="/auth/*" element={<AuthRouter />} />
       <Route path="/courses" element={<CoursesPage />} />
       <Route path="/pricing" element={<PricingPage />} />
       <Route path="/about" element={<AboutPage />} />

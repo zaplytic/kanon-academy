@@ -51,6 +51,7 @@
 .link {
   display: block;
   color: light-dark(var(--mantine-color-gray-6), var(--mantine-color-dark-1));
+  text-decoration: none;
   font-size: var(--mantine-font-size-sm);
   padding-top: rem(3);
   padding-bottom: rem(3);
