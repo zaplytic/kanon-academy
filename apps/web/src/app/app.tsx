@@ -3,7 +3,9 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 
 import "@mantine/core/styles.css";
+import "@mantine/notifications/styles.css";
 import { MantineProvider, MantineColorsTuple, createTheme } from "@mantine/core";
+import { Notifications } from "@mantine/notifications";
 
 const myColor: MantineColorsTuple = [
   "#dffbff",
@@ -27,6 +29,7 @@ const theme = createTheme({
 export default function App() {
   return (
     <MantineProvider theme={theme} defaultColorScheme="dark">
+      <Notifications />
       <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
         <Navbar>
           <AppRouter />

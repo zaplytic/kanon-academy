@@ -7,7 +7,8 @@ import {
   UnauthorizedError,
   RegistrationInput,
   LoginResponse,
-  JwtPayload
+  JwtPayload,
+  DuplicateEmailError
 } from "@kanon-academy/types";
 import { toUserPersistence, toUserResponse, toLoginResponse } from "@/mappers/auth.mapper";
 import { dbSelectUserType } from "@kanon-academy/db-schema";
@@ -19,6 +20,12 @@ export default class AuthService {
   constructor(private readonly authRepository: AuthRepository) {}
 
   async registerUser(input: RegistrationInput) {
+    const emailExists = await this.authRepository.checkEmailExistence(input.email);
+
+    if (emailExists) {
+      throw new DuplicateEmailError("The provided email address is already registered.");
+    }
+
     const saltRounds = 10;
     const salt = await bcrypt.genSalt(saltRounds);
     const hash = await bcrypt.hash(input.password, salt);

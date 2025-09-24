@@ -28,3 +28,9 @@ export class UnauthorizedError extends AppError {
     super(message, 401);
   }
 }
+
+export class DuplicateEmailError extends AppError {
+  constructor(message = "Email already exists") {
+    super(message, 409);
+  }
+}
