@@ -2,15 +2,22 @@ import { AppShell, Burger, Group, Button, Text, useMantineTheme, Image } from "@
 import { useDisclosure, useMediaQuery } from "@mantine/hooks";
 import { Link } from "react-router-dom";
 import { ReactNode } from "react";
+import { useAuthStore } from "../../stores/authStore";
+import { protectedNavLinks, publicNavLinks } from "../../config/links";
+import UserMenu from "./UserMenu";
 
 interface NavbarProps {
   children: ReactNode;
 }
 
-export default function Navbar({ children }: NavbarProps) {
+export default function Header({ children }: NavbarProps) {
   const [opened, { toggle }] = useDisclosure();
   const theme = useMantineTheme();
   const isMobile = useMediaQuery(`(max-width: ${theme.breakpoints.md})`);
+
+  const user = useAuthStore((state) => state.user);
+
+  const links = user === null ? publicNavLinks : protectedNavLinks;
 
   return (
     <AppShell
@@ -50,38 +57,35 @@ export default function Navbar({ children }: NavbarProps) {
             </Link>
           </Group>
           <Group visibleFrom="md">
-            <Button component={Link} to="/courses" variant="subtle">
-              Courses
-            </Button>
-            <Button component={Link} to="/pricing" variant="subtle">
-              Pricing
-            </Button>
-            <Button component={Link} to="/about" variant="subtle">
-              About
-            </Button>
+            {links.map((link) => (
+              <Button component={Link} to={link.to} variant="subtle">
+                {link.label}
+              </Button>
+            ))}
           </Group>
-          <Group>
-            <Button component={Link} to="/auth/login" variant="default">
-              Log In
-            </Button>
-            <Button component={Link} to="/auth/register">
-              Sign Up
-            </Button>
-          </Group>
+          {/* Nav Actions */}
+          {user === null ? (
+            <Group>
+              <Button component={Link} to="/auth/login" variant="default">
+                Log In
+              </Button>
+              <Button component={Link} to="/auth/register">
+                Sign Up
+              </Button>
+            </Group>
+          ) : (
+            <UserMenu />
+          )}
         </Group>
       </AppShell.Header>
 
       {isMobile && (
         <AppShell.Navbar p="md">
-          <Button component={Link} to="/courses" variant="subtle" fullWidth>
-            Courses
-          </Button>
-          <Button component={Link} to="/pricing" variant="subtle" fullWidth>
-            Pricing
-          </Button>
-          <Button component={Link} to="/about" variant="subtle" fullWidth>
-            About
-          </Button>
+          {links.map((link) => (
+            <Button component={Link} to={link.to} variant="subtle" fullWidth>
+              {link.label}
+            </Button>
+          ))}
         </AppShell.Navbar>
       )}
 

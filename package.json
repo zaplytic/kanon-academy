@@ -29,6 +29,7 @@
     "autoprefixer": "^10.4.21",
     "axios": "^1.12.2",
     "bcrypt": "^6.0.0",
+    "clsx": "^2.1.1",
     "dayjs": "^1.11.18",
     "dotenv": "^17.2.2",
     "drizzle-orm": "0.44.5",

@@ -1,5 +1,5 @@
 import AppRouter from "./router";
-import Navbar from "./components/Navbar";
+import Header from "./components/Header";
 import Footer from "./components/Footer";
 
 import "@mantine/core/styles.css";
@@ -31,9 +31,9 @@ export default function App() {
     <MantineProvider theme={theme} defaultColorScheme="dark">
       <Notifications />
       <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
-        <Navbar>
+        <Header>
           <AppRouter />
-        </Navbar>
+        </Header>
         <Footer />
       </div>
     </MantineProvider>

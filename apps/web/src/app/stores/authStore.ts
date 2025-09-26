@@ -20,7 +20,7 @@ export const useAuthStore = create(
       }
     }),
     {
-      name: "kanon-auth-storage" // Unique key for localStorage
+      name: "kanon-auth-storage"
     }
   )
 );
