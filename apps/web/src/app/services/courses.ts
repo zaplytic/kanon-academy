@@ -10,3 +10,12 @@ export async function getCourses(): Promise<CourseResponse[]> {
 
   return result.data.data ?? [];
 }
+
+export async function getCourse(courseId: string): Promise<CourseResponse> {
+  const result = await axiosSecure.get<ApiResponse<CourseResponse>>(`/courses/${courseId}`);
+  if (result.data.data === undefined) {
+    throw new Error(result.data.message || "Course not found");
+  }
+
+  return result.data.data;
+}

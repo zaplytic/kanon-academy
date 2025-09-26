@@ -6,6 +6,7 @@ import PricingPage from "./pages/PricingPage";
 import AboutPage from "./pages/AboutPage";
 import DashboardPage from "./pages/DashboardPage";
 import ProfilePage from "./pages/ProfilePage";
+import CoursePage from "./pages/CoursePage";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 
 export default function AppRouter() {
@@ -14,6 +15,8 @@ export default function AppRouter() {
       <Route path="/" element={<HomePage />} />
       <Route path="/auth/*" element={<AuthRouter />} />
       <Route path="/courses" element={<CoursesPage />} />
+      <Route path="/courses/:courseId" element={<CoursePage />} />
+
       <Route path="/pricing" element={<PricingPage />} />
       <Route path="/about" element={<AboutPage />} />
       <Route element={<ProtectedRoute />}>

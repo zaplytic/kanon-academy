@@ -82,7 +82,7 @@ export default function Header({ children }: NavbarProps) {
       {isMobile && (
         <AppShell.Navbar p="md">
           {links.map((link) => (
-            <Button component={Link} to={link.to} variant="subtle" fullWidth>
+            <Button component={Link} to={link.to} variant="subtle" fullWidth onClick={toggle}>
               {link.label}
             </Button>
           ))}

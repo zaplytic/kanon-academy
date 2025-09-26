@@ -14,6 +14,7 @@ import {
   Alert
 } from "@mantine/core";
 import { IconAlertCircle } from "@tabler/icons-react";
+import { Link } from "react-router-dom";
 
 export default function CoursesPage() {
   const {
@@ -68,7 +69,13 @@ export default function CoursesPage() {
               {course.description}
             </Text>
 
-            <Button color="blue" fullWidth mt="md" radius="md">
+            <Button
+              color="blue"
+              fullWidth
+              mt="md"
+              radius="md"
+              component={Link}
+              to={`/courses/${course.id}`}>
               Learn More
             </Button>
           </Card>
