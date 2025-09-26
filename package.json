@@ -30,6 +30,7 @@
     "axios": "^1.12.2",
     "bcrypt": "^6.0.0",
     "clsx": "^2.1.1",
+    "cors": "^2.8.5",
     "dayjs": "^1.11.18",
     "dotenv": "^17.2.2",
     "drizzle-orm": "0.44.5",
@@ -76,6 +77,7 @@
     "@testing-library/dom": "10.4.0",
     "@testing-library/react": "16.1.0",
     "@types/bcrypt": "^6.0.0",
+    "@types/cors": "^2.8.19",
     "@types/express": "^4.17.21",
     "@types/jest": "^30.0.0",
     "@types/jsonwebtoken": "^9.0.10",
@@ -115,7 +117,7 @@
   "lint-staged": {
     "*.{js,ts,jsx,tsx,html,css,scss,json,md}": [
       "prettier -c",
-      "nx run-many -t lint --fix",
+      "nx run-many -t lint",
       "nx run-many -t test",
       "nx run-many -t typecheck"
     ]

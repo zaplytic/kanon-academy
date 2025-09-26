@@ -1,8 +1,10 @@
 import axios from "axios";
 import { useAuthStore } from "../app/stores/authStore";
 
+const apiBaseUrl = process.env.REACT_APP_API_URL || "/api";
+
 const axiosSecure = axios.create({
-  baseURL: "/api",
+  baseURL: apiBaseUrl,
   timeout: 15000,
   headers: {
     "Content-Type": "application/json"

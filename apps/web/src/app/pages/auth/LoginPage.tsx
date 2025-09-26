@@ -67,7 +67,7 @@ export default function LoginPage() {
         loading: false,
         color: "red",
         icon: <IconAlertCircle size={18} />,
-        title: "User registration failed",
+        title: "Login failed",
         message: message || error.message || "Unknown error occurred"
       });
     }

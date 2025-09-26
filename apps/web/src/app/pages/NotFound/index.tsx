@@ -1,4 +1,5 @@
 import { Button, Container, Group, Text, Title } from "@mantine/core";
+import { Link } from "react-router-dom";
 import { Illustration } from "./Illustration";
 import classes from "./NotFound.module.css";
 
@@ -18,7 +19,9 @@ export function NotFoundPage({ title }: NotFoundProps) {
             page has been moved to another URL. If you think this is an error contact support.
           </Text>
           <Group justify="center">
-            <Button size="md">Take me back to home page</Button>
+            <Button component={Link} to="/" size="md">
+              Take me back to home page
+            </Button>
           </Group>
         </div>
       </div>

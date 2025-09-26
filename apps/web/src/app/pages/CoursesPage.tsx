@@ -57,30 +57,36 @@ export default function CoursesPage() {
       <Title order={1} ta="center" mb="xl">
         Explore Our Courses
       </Title>
-      <SimpleGrid cols={{ base: 1, sm: 2, md: 3 }}>
-        {courses.map((course: CourseResponse) => (
-          <Card shadow="sm" padding="lg" radius="md" withBorder key={course.id}>
-            <Group justify="space-between" mt="md" mb="xs">
-              <Title order={3}>{course.title}</Title>
-              <Badge color="pink">New</Badge>
-            </Group>
+      {courses.length === 0 ? (
+        <Text ta="center" c="dimmed">
+          We're getting things ready-check back soon for new courses.
+        </Text>
+      ) : (
+        <SimpleGrid cols={{ base: 1, sm: 2, md: 3 }}>
+          {courses.map((course: CourseResponse) => (
+            <Card shadow="sm" padding="lg" radius="md" withBorder key={course.id}>
+              <Group justify="space-between" mt="md" mb="xs">
+                <Title order={3}>{course.title}</Title>
+                <Badge color="pink">New</Badge>
+              </Group>
 
-            <Text size="sm" c="dimmed" lineClamp={4}>
-              {course.description}
-            </Text>
+              <Text size="sm" c="dimmed" lineClamp={4}>
+                {course.description}
+              </Text>
 
-            <Button
-              color="blue"
-              fullWidth
-              mt="md"
-              radius="md"
-              component={Link}
-              to={`/courses/${course.id}`}>
-              Learn More
-            </Button>
-          </Card>
-        ))}
-      </SimpleGrid>
+              <Button
+                color="blue"
+                fullWidth
+                mt="md"
+                radius="md"
+                component={Link}
+                to={`/courses/${course.id}`}>
+                Learn More
+              </Button>
+            </Card>
+          ))}
+        </SimpleGrid>
+      )}
     </Container>
   );
 }

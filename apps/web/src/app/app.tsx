@@ -1,41 +1,47 @@
+import "@mantine/core/styles.css";
+import "@mantine/notifications/styles.css";
+import { AppShell, useMantineTheme } from "@mantine/core";
+import { Notifications } from "@mantine/notifications";
+import { useDisclosure, useMediaQuery } from "@mantine/hooks";
+
 import AppRouter from "./router";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-
-import "@mantine/core/styles.css";
-import "@mantine/notifications/styles.css";
-import { MantineProvider, MantineColorsTuple, createTheme } from "@mantine/core";
-import { Notifications } from "@mantine/notifications";
-
-const myColor: MantineColorsTuple = [
-  "#dffbff",
-  "#caf2ff",
-  "#99e2ff",
-  "#64d2ff",
-  "#3cc4fe",
-  "#23bcfe",
-  "#00b5ff",
-  "#00a1e4",
-  "#008fcd",
-  "#007cb6"
-];
-
-const theme = createTheme({
-  colors: {
-    myColor
-  }
-});
+import NavBar from "./components/NavBar";
 
 export default function App() {
+  const theme = useMantineTheme();
+  const [opened, { toggle }] = useDisclosure();
+  const isMobile = useMediaQuery(`(max-width: ${theme.breakpoints.md})`);
+
   return (
-    <MantineProvider theme={theme} defaultColorScheme="dark">
+    <AppShell
+      padding="md"
+      header={{ height: 60 }}
+      navbar={
+        isMobile
+          ? {
+              width: 300,
+              breakpoint: "md",
+              collapsed: { mobile: !opened }
+            }
+          : undefined
+      }>
+      <AppShell.Header>
+        <Header opened={opened} toggle={toggle} />
+      </AppShell.Header>
+
+      {isMobile && (
+        <AppShell.Navbar p="md">
+          <NavBar opened={opened} toggle={toggle} />
+        </AppShell.Navbar>
+      )}
+
+      <AppShell.Main>
+        <AppRouter />
+      </AppShell.Main>
+      <Footer />
       <Notifications />
-      <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
-        <Header>
-          <AppRouter />
-        </Header>
-        <Footer />
-      </div>
-    </MantineProvider>
+    </AppShell>
   );
 }

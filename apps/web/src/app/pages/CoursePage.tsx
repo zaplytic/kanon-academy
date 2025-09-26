@@ -50,7 +50,10 @@ export default function CoursePage() {
   } = useQuery({
     queryKey: ["courses", courseId],
     queryFn: () => getCourse(courseId as string),
-    enabled: !!courseId
+    enabled: !!courseId,
+    retry: false,
+    staleTime: 1000 * 60 * 5,
+    refetchOnWindowFocus: false
   });
 
   if (isPending) {

@@ -18,7 +18,7 @@ export default function ProfilePage() {
           <Avatar
             size={120}
             radius="100%"
-            src={`https://api.dicebear.com/8.x/initials/svg?seed=${user.full_name}`}
+            src={`https://api.dicebear.com/8.x/initials/svg?seed=${user.full_name?.slice(0, 2)}`}
           />
           <div>
             <Title order={3}>{user.full_name}</Title>
