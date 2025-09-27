@@ -1,14 +1,20 @@
 import cors from "cors";
+import { ENVIRONMENT } from "./secrets";
 
-const allowedOrigins = ["http://localhost:4200", "https://kanon-academy.pages.dev"];
+const prodAllowedOrigins = ["https://kanon-academy.pages.dev"];
+
+const devAllowedOrigins = ["http://localhost:4200"];
+
+const allowedOrigins = ENVIRONMENT === "production" ? prodAllowedOrigins : devAllowedOrigins;
 
 export const corsOptions: cors.CorsOptions = {
   origin: (origin, callback) => {
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error("This origin is not allowed by CORS policy."));
+    if (!origin || allowedOrigins.indexOf(origin) === -1) {
+      return callback(null, false);
     }
+    return callback(null, true);
   },
-  credentials: true
+  credentials: true,
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
+  optionsSuccessStatus: 200
 };
