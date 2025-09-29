@@ -3,6 +3,7 @@ export * from "./api.js";
 export * from "./errors.js";
 export * from "./user.js";
 export * from "./course.js";
+export * from "./enrollment.js";
 
 export * from "./validations/index.js";
 

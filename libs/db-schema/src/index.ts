@@ -98,3 +98,6 @@ export type dbSelectCourseType = typeof courses.$inferSelect;
 
 export type dbInsertCategoryType = typeof categories.$inferInsert;
 export type dbSelectCategoryType = typeof categories.$inferSelect;
+
+export type dbSelectEnrollmentType = typeof enrollments.$inferSelect;
+export type dbInsertEnrollementType = typeof enrollments.$inferInsert;

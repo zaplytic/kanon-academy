@@ -8,7 +8,8 @@ import {
   RegistrationInput,
   LoginResponse,
   JwtPayload,
-  DuplicateEmailError
+  DuplicateEmailError,
+  UserResponse
 } from "@kanon-academy/types";
 import { toUserPersistence, toUserResponse, toLoginResponse } from "@/mappers/auth.mapper";
 import { dbSelectUserType } from "@kanon-academy/db-schema";
@@ -33,6 +34,14 @@ export default class AuthService {
 
     const user = await this.authRepository.createUser(userInsert);
     return toUserResponse(user);
+  }
+
+  async getUserByEmail(email: string | undefined): Promise<UserResponse | null> {
+    if (email === undefined) {
+      return null;
+    }
+    const user = await this.authRepository.findUserByEmail(email);
+    return user;
   }
 
   async loginUser(input: LoginInput): Promise<LoginResponse> {
