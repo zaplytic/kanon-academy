@@ -1,7 +1,10 @@
 import axios from "axios";
 import { useAuthStore } from "../app/stores/authStore";
 
-const apiBaseUrl = process.env.REACT_APP_API_URL || "/api";
+const apiBaseUrl =
+  process.env.NODE_ENV === "development"
+    ? "/api"
+    : "https://kanon-academy-api-41f736fb7af3.herokuapp.com/api";
 
 const axiosSecure = axios.create({
   baseURL: apiBaseUrl,
