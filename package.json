@@ -4,7 +4,8 @@
   "license": "MIT",
   "scripts": {
     "prepare": "husky",
-    "build": "nx build api --prod"
+    "build": "nx build api --prod",
+    "db:migrate": "node libs/db-schema/migrate.cjs"
   },
   "private": true,
   "dependencies": {
