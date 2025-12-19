@@ -29,7 +29,7 @@
           "watchDepsName": "watch-deps"
         }
       },
-      "exclude": ["libs/types/*"]
+      "exclude": ["libs/types/*", "libs/db-schema/*"]
     },
     {
       "plugin": "@nx/webpack/plugin",
@@ -57,7 +57,7 @@
     },
     {
       "plugin": "@nx/js/typescript",
-      "include": ["libs/types/*"],
+      "include": ["libs/types/*", "libs/db-schema/*"],
       "options": {
         "typecheck": {
           "targetName": "typecheck"

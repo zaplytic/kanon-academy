@@ -3,7 +3,6 @@
   font-display: swap;
   font-family: "Montserrat";
   font-style: normal;
-  font-weight: ;
   src: url("/assets/fonts/Montserrat-SemiBold.woff2") format("woff2");
 }
 
@@ -24,6 +23,7 @@
   font-weight: 400;
   src: url("/assets/fonts/HindSiliguri-Regular.woff2") format("woff2");
 }
+
 @font-face {
   font-display: swap;
   font-family: "Hind Siliguri";

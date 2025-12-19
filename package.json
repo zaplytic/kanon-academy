@@ -35,7 +35,7 @@
     "cors": "^2.8.5",
     "dayjs": "^1.11.18",
     "dotenv": "^17.2.2",
-    "drizzle-orm": "0.44.5",
+    "drizzle-orm": "0.45.1",
     "drizzle-zod": "^0.8.3",
     "embla-carousel": "^8.5.2",
     "embla-carousel-react": "^8.5.2",
@@ -89,7 +89,7 @@
     "@types/react-dom": "19.0.0",
     "@types/supertest": "^6.0.3",
     "babel-jest": "^30.0.2",
-    "drizzle-kit": "0.31.4",
+    "drizzle-kit": "0.31.8",
     "eslint": "^9.8.0",
     "eslint-config-prettier": "^10.0.0",
     "eslint-plugin-import": "2.31.0",
@@ -130,6 +130,6 @@
     "libs/*"
   ],
   "resolutions": {
-    "drizzle-orm": "0.44.5"
+    "drizzle-orm": "0.45.1"
   }
 }

@@ -96,9 +96,10 @@ const newUser: User = {
 
 #### table `enrollments`
 
+Composite primary key containing `user_id` and `course_id`
+
 | Column       | Type        | Description                                                 |
 | ------------ | ----------- | ----------------------------------------------------------- |
-| `id`         | `SERIAL`    | **Primary Key**                                             |
 | `user_id`    | `INTEGER`   | **Foreign Key** to `users.id`                               |
 | `course_id`  | `INTEGER`   | **Foreign Key** to `courses.id`                             |
 | `progress`   | `JSONB`     | Stores user progress, e.g., `{"completed_lessons": [1, 5]}` |
@@ -107,4 +108,4 @@ const newUser: User = {
 
 ---
 
-_© 2025 Kanon Academy. All rights reserved._
+© 2025 Kanon Academy. All rights reserved.
