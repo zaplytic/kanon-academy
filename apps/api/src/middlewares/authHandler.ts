@@ -3,7 +3,7 @@ import { Request, Response, NextFunction } from "express";
 import * as jwt from "jsonwebtoken";
 import { JwtPayload, UnauthorizedError } from "@kanon-academy/types";
 
-export function authHandler(req: Request, res: Response, next: NextFunction) {
+export function authHandler(req: Request, _res: Response, next: NextFunction) {
   try {
     const authHeader = req.headers.authorization;
     if (!authHeader || !authHeader.startsWith("Bearer ")) {

@@ -14,7 +14,6 @@ export function toEnrollmentPersistance(
 
 export function toEnrollmentResponse(data: dbSelectEnrollmentType): EnrollmentResponse {
   return {
-    id: data.id,
     course_id: data.course_id,
     user_id: data.user_id,
     created_at: data.created_at

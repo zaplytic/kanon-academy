@@ -1,6 +1,6 @@
 {
-  "id": "5e194b4b-59fe-4787-a226-27a4ea63480f",
-  "prevId": "032008be-a302-477b-94dc-3f57e57801f0",
+  "id": "41e8671b-e4ee-4ce8-990d-0ac0f6794861",
+  "prevId": "43aa6d88-9196-4846-98ad-aad59ed8be27",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -104,7 +104,8 @@
           "type": "courseStatuses",
           "typeSchema": "public",
           "primaryKey": false,
-          "notNull": true
+          "notNull": true,
+          "default": "'draft'"
         },
         "description": {
           "name": "description",
@@ -120,7 +121,7 @@
         },
         "featured_image_link": {
           "name": "featured_image_link",
-          "type": "varchar(511)",
+          "type": "text",
           "primaryKey": false,
           "notNull": false
         },
@@ -182,23 +183,6 @@
       "name": "enrollments",
       "schema": "",
       "columns": {
-        "id": {
-          "name": "id",
-          "type": "integer",
-          "primaryKey": true,
-          "notNull": true,
-          "identity": {
-            "type": "byDefault",
-            "name": "enrollments_id_seq",
-            "schema": "public",
-            "increment": "1",
-            "startWith": "1",
-            "minValue": "1",
-            "maxValue": "2147483647",
-            "cache": "1",
-            "cycle": false
-          }
-        },
         "user_id": {
           "name": "user_id",
           "type": "integer",
@@ -259,20 +243,19 @@
           "onUpdate": "no action"
         }
       },
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {
-        "enrollments_user_id_course_id_unique": {
-          "name": "enrollments_user_id_course_id_unique",
-          "nullsNotDistinct": false,
+      "compositePrimaryKeys": {
+        "enrollments_user_id_course_id_pk": {
+          "name": "enrollments_user_id_course_id_pk",
           "columns": ["user_id", "course_id"]
         }
       },
+      "uniqueConstraints": {},
       "policies": {},
       "checkConstraints": {},
       "isRLSEnabled": false
     },
-    "public.lessons": {
-      "name": "lessons",
+    "public.users": {
+      "name": "users",
       "schema": "",
       "columns": {
         "id": {
@@ -282,7 +265,7 @@
           "notNull": true,
           "identity": {
             "type": "byDefault",
-            "name": "lessons_id_seq",
+            "name": "users_id_seq",
             "schema": "public",
             "increment": "1",
             "startWith": "1",
@@ -292,29 +275,56 @@
             "cycle": false
           }
         },
-        "milestone_id": {
-          "name": "milestone_id",
-          "type": "integer",
+        "full_name": {
+          "name": "full_name",
+          "type": "varchar(255)",
           "primaryKey": false,
-          "notNull": true
+          "notNull": false
         },
-        "title": {
-          "name": "title",
+        "email": {
+          "name": "email",
           "type": "varchar(255)",
           "primaryKey": false,
           "notNull": true
         },
-        "content": {
-          "name": "content",
-          "type": "jsonb",
+        "email_verified_at": {
+          "name": "email_verified_at",
+          "type": "timestamp",
           "primaryKey": false,
           "notNull": false
         },
-        "order": {
-          "name": "order",
-          "type": "integer",
+        "password_hash": {
+          "name": "password_hash",
+          "type": "varchar(511)",
           "primaryKey": false,
           "notNull": true
+        },
+        "bio": {
+          "name": "bio",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "role": {
+          "name": "role",
+          "type": "userRoles",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "status": {
+          "name": "status",
+          "type": "userStatuses",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'active'"
+        },
+        "last_login_at": {
+          "name": "last_login_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
         },
         "updated_at": {
           "name": "updated_at",
@@ -338,19 +348,15 @@
         }
       },
       "indexes": {},
-      "foreignKeys": {
-        "lessons_milestone_id_milestones_id_fk": {
-          "name": "lessons_milestone_id_milestones_id_fk",
-          "tableFrom": "lessons",
-          "tableTo": "milestones",
-          "columnsFrom": ["milestone_id"],
-          "columnsTo": ["id"],
-          "onDelete": "cascade",
-          "onUpdate": "no action"
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "users_email_unique": {
+          "name": "users_email_unique",
+          "nullsNotDistinct": false,
+          "columns": ["email"]
         }
       },
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
       "policies": {},
       "checkConstraints": {},
       "isRLSEnabled": false
@@ -439,8 +445,8 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
-    "public.users": {
-      "name": "users",
+    "public.lessons": {
+      "name": "lessons",
       "schema": "",
       "columns": {
         "id": {
@@ -450,7 +456,7 @@
           "notNull": true,
           "identity": {
             "type": "byDefault",
-            "name": "users_id_seq",
+            "name": "lessons_id_seq",
             "schema": "public",
             "increment": "1",
             "startWith": "1",
@@ -460,55 +466,29 @@
             "cycle": false
           }
         },
-        "full_name": {
-          "name": "full_name",
+        "milestone_id": {
+          "name": "milestone_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "title": {
+          "name": "title",
           "type": "varchar(255)",
           "primaryKey": false,
           "notNull": true
         },
-        "email": {
-          "name": "email",
-          "type": "varchar(255)",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "email_verified_at": {
-          "name": "email_verified_at",
-          "type": "timestamp",
+        "content": {
+          "name": "content",
+          "type": "jsonb",
           "primaryKey": false,
           "notNull": false
         },
-        "password_hash": {
-          "name": "password_hash",
-          "type": "varchar(511)",
+        "order": {
+          "name": "order",
+          "type": "integer",
           "primaryKey": false,
           "notNull": true
-        },
-        "bio": {
-          "name": "bio",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "role": {
-          "name": "role",
-          "type": "userRoles",
-          "typeSchema": "public",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "status": {
-          "name": "status",
-          "type": "userStatuses",
-          "typeSchema": "public",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "last_login_at": {
-          "name": "last_login_at",
-          "type": "timestamp",
-          "primaryKey": false,
-          "notNull": false
         },
         "updated_at": {
           "name": "updated_at",
@@ -532,15 +512,19 @@
         }
       },
       "indexes": {},
-      "foreignKeys": {},
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {
-        "users_email_unique": {
-          "name": "users_email_unique",
-          "nullsNotDistinct": false,
-          "columns": ["email"]
+      "foreignKeys": {
+        "lessons_milestone_id_milestones_id_fk": {
+          "name": "lessons_milestone_id_milestones_id_fk",
+          "tableFrom": "lessons",
+          "tableTo": "milestones",
+          "columnsFrom": ["milestone_id"],
+          "columnsTo": ["id"],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
         }
       },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
       "policies": {},
       "checkConstraints": {},
       "isRLSEnabled": false

@@ -19,4 +19,9 @@ export default class CourseService {
     const publishedCourses: CourseRepoSelectType[] = await this.courseRepository.getAllCourse();
     return publishedCourses.map(toCourseResponse);
   }
+
+  async getUserCourses(userEmail: string): Promise<CourseResponse[]> {
+    const publishedCourses = await this.courseRepository.getUserCourses(userEmail);
+    return publishedCourses.map(toCourseResponse);
+  }
 }

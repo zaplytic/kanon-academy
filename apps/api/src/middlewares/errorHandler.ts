@@ -5,13 +5,7 @@ import logger from "@/config/logger";
 import { ENVIRONMENT } from "@/config/secrets";
 import formatZodIssues, { type FormattedZodErrors } from "@/utils/formatZodError";
 
-const errorHandler = (
-  err: Error,
-  _req: Request,
-  res: Response,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  _next: NextFunction
-) => {
+const errorHandler = (err: Error, _req: Request, res: Response, _next: NextFunction) => {
   logger.error(`💥 ${err.stack ?? err.message}`);
 
   if (err instanceof AppError) {
