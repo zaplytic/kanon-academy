@@ -58,11 +58,7 @@
           }
         }
       },
-      "test": {
-        "options": {
-          "passWithNoTests": true
-        }
-      }
+      "test": {}
     }
   },
   "dependencies": {

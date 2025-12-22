@@ -5,6 +5,7 @@ import logger from "@/config/logger";
 import { ENVIRONMENT } from "@/config/secrets";
 import formatZodIssues, { type FormattedZodErrors } from "@/utils/formatZodError";
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const errorHandler = (err: Error, _req: Request, res: Response, _next: NextFunction) => {
   logger.error(`💥 ${err.stack ?? err.message}`);
 
@@ -12,19 +13,22 @@ const errorHandler = (err: Error, _req: Request, res: Response, _next: NextFunct
     return res.status(err.statusCode).json({
       success: false,
       message: err.message,
-      error: ENVIRONMENT === "development" ? err.stack : undefined
+      error: ENVIRONMENT === "development" ? err.stack : undefined,
+      timestamp: new Date().toISOString()
     } as ApiResponse<void>);
   } else if (err instanceof ZodError) {
     return res.status(400).json({
       success: false,
       message: "Invalid request data",
-      error: formatZodIssues(err.issues)
+      error: formatZodIssues(err.issues),
+      timestamp: new Date().toISOString()
     } as ApiResponse<void, FormattedZodErrors>);
   } else {
     return res.status(500).json({
       success: false,
       message: "Internal Server Error",
-      error: ENVIRONMENT === "development" ? err.stack : undefined
+      error: ENVIRONMENT === "development" ? err.stack : undefined,
+      timestamp: new Date().toISOString()
     } as ApiResponse<void>);
   }
 };

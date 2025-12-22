@@ -2975,9 +2975,9 @@
     yargs-parser "21.1.1"
 
 "@paralleldrive/cuid2@^2.2.2":
-  version "2.2.2"
-  resolved "https://registry.yarnpkg.com/@paralleldrive/cuid2/-/cuid2-2.2.2.tgz#7f91364d53b89e2c9cb9e02e8dd0f129e834455f"
-  integrity sha512-ZOBkgDwEdoYVlSeRbYYXs0S9MejQofiVYoTbKzy/6GQa39/q5tQU2IX46+shYnUkpEl3wc+J6wRlar7r2EK2xA==
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/@paralleldrive/cuid2/-/cuid2-2.3.1.tgz#3d62ea9e7be867d3fa94b9897fab5b0ae187d784"
+  integrity sha512-XO7cAxhnTZl0Yggq6jOgjiOHhbgcO4NqFqwSmQpjK3b6TEE6Uj/jfSk6wzYyemh3+I0sHirKSetjQwn5cZktFw==
   dependencies:
     "@noble/hashes" "^1.1.5"
 

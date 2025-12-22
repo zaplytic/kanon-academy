@@ -3,9 +3,15 @@
   "compilerOptions": {
     "outDir": "./out-tsc/jest",
     "types": ["jest", "node"],
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["src/*"],
+      "@kanon-academy/types": ["../../libs/types/src/index.ts"]
     }
   },
   "include": ["jest.config.ts", "src/**/*.test.ts", "src/**/*.spec.ts", "src/**/*.d.ts"],
