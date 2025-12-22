@@ -10,7 +10,9 @@ export default function validationHandler(schema: ZodObject) {
         params: req.params
       });
       req.body = parsed.body;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       req.query = (parsed as any).query;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       req.params = (parsed as any).params;
 
       return next();

@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { HealthCheckResponse, ServiceHealth } from "@kanon-academy/types";
+import { ApiResponse, HealthCheckResponse, ServiceHealth } from "@kanon-academy/types";
 import { singleton } from "tsyringe";
 import HealthCheckService from "@/services/healthCheck.service";
 import { PACKAGE_VERSION } from "@/config/secrets";
@@ -23,12 +23,16 @@ export default class HealthCheckController {
       overallStatus = "degraded";
     }
 
-    const healthCheckResponse: HealthCheckResponse = {
-      status: overallStatus,
-      timestamp: new Date().toISOString(),
-      version: appVersion,
-      uptime: appUptime,
-      services: services
+    const healthCheckResponse: ApiResponse<HealthCheckResponse> = {
+      success: true,
+      message: "HealthCheck completed",
+      data: {
+        status: overallStatus,
+        version: appVersion,
+        uptime: appUptime,
+        services: services
+      },
+      timestamp: new Date().toISOString()
     };
 
     res.status(200).json(healthCheckResponse);

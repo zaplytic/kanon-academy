@@ -10,7 +10,6 @@ export type HealthStatus = "healthy" | "unhealthy" | "degraded";
 
 export interface HealthCheckResponse {
   status: "healthy" | "unhealthy" | "degraded";
-  timestamp: string;
   version: string;
   uptime: number;
   services: ServiceHealth[];
