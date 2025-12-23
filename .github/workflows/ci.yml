@@ -16,6 +16,22 @@ permissions:
 jobs:
   main:
     runs-on: ubuntu-latest
+    
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_USER: test_user
+          POSTGRES_PASSWORD: test_password
+          POSTGRES_DB: kanon_academy_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    
     steps:
       - uses: actions/checkout@v4
         with:
@@ -36,9 +52,22 @@ jobs:
 
       - run: yarn install --frozen-lockfile
 
+      # Run database migrations before tests
+      - name: Run database migrations
+        run: yarn db:migrate
+        env:
+          DATABASE_URL: postgresql://test_user:test_password@localhost:5432/kanon_academy_test
+          NODE_ENV: test
+
       # Prepend any command with "nx-cloud record --" to record its logs to Nx Cloud
       # - run: yarn nx-cloud record -- echo Hello World
-      - run: yarn nx run-many -t lint test build typecheck
+      - name: Run tests and build
+        run: yarn nx run-many -t lint test build typecheck
+        env:
+          DATABASE_URL: postgresql://test_user:test_password@localhost:5432/kanon_academy_test
+          NODE_ENV: test
+          JWT_SECRET: test-jwt-secret-for-ci
+          
       # Nx Cloud recommends fixes for failures to help you get CI green faster. Learn more: https://nx.dev/ci/features/self-healing-ci
       - run: yarn nx fix-ci
         if: always()
